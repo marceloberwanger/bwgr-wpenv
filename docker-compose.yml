@@ -6,7 +6,6 @@
 version: '3.7'
 
 services:
-
   # Container 1
   # https://hub.docker.com/_/mysql
   db:
@@ -36,7 +35,7 @@ services:
 
   # Container 2
   # https://hub.docker.com/_/wordpress
-  wp:
+  wp-cli:
     # List of dependencies
     depends_on:
     - db
@@ -64,6 +63,8 @@ services:
       - db
     # Add environment variables
     # https://docs.docker.com/compose/compose-file/#environment
+    env_file:
+      - ./env/mysql.env
     environment:
       WORDPRESS_DB_HOST: db:3306
       WORDPRESS_DB_USER: root
